@@ -1,5 +1,16 @@
+
 const getRandomDadJoke = async () => {
-  return "Do you want a brief explanation of what an acorn is? In a nutshell, it's an oak tree."
+  const url = "https://icanhazdadjoke.com/"
+
+  const jokeStream = await fetch(url, {
+    headers: {
+      Accept: "application/json"
+    }
+  })
+  const jsonJoke = await jokeStream.json()
+  // console.log(jsonJoke)
+  const joke = jsonJoke.joke
+  return joke
 }
 
 const displayJoke = (joke) => {
@@ -17,9 +28,11 @@ const refreshJoke = async () => {
 refreshJoke()
 
 
+// When only need to load one function
+setInterval(refreshJoke, 10000)
 
 
-
-setInterval(() => {
-  refreshJoke()
-}, 3000)
+// Anonymous function 
+// setInterval(() => {
+//   refreshJoke()
+// }, 10000)

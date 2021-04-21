@@ -1,15 +1,24 @@
 
 const getRandomDadJoke = async () => {
-  const url = "https://icanhazdadjoke.com/"
 
-  const jokeStream = await fetch(url, {
-    headers: {
-      Accept: "application/json"
-    }
-  })
+  //// This url now handled by serverless function ////
+  // const url = "https://icanhazdadjoke.com/"
+
+  // const jokeStream = await fetch(url, {
+  //   headers: {
+  //     Accept: "application/json"
+  //   }
+  // })
+
+  // === REQUEST SERVERLESS FUNCTION === //
+  const url = "/.netlify/functions/jokes"
+  const jokeStream = await fetch(url)
+  // === REQUEST SERVERLESS FUNCTION === //
+
   const jsonJoke = await jokeStream.json()
-  // console.log(jsonJoke)
   const joke = jsonJoke.joke
+  console.log(jsonJoke)
+  console.log(joke)
   return joke
 }
 
@@ -29,7 +38,7 @@ refreshJoke()
 
 
 // When only need to load one function
-setInterval(refreshJoke, 10000)
+setInterval(refreshJoke, 5000)
 
 
 // Anonymous function 
